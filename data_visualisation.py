@@ -23,3 +23,9 @@ def bar_charts(df):
         # Display the plot
     plt.show()
 
+def corr_heatmap(corr_matrix):
+    
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+    plt.title('Correlation Matrix')
+    plt.show()

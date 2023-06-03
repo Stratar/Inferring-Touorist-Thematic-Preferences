@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from collections import Counter
 from data_visualisation import bar_charts
+from data_analysis import basic_statistics
 
 def import_data_from_xlsx(filename='data/customers/Touristic Concept_May 23, 2023_07.31.xlsx'):
     data = pd.read_excel(filename)
@@ -49,12 +50,21 @@ def split(text_data, numerical_data, labels):
 
     return text_train, text_test, numerical_train, numerical_test, labels_train, labels_test
 
+def assign_correct_dtype(data):
+
+    numerical = data.filter(like='P themes').columns.tolist()
+    data[numerical] = data[numerical].astype(int)
+
+    return data
+
 data = import_data_from_xlsx()
 data = remove_verbose_columns(data)
 data = filter_columns(data)
-
+data = assign_correct_dtype(data)
 print(data)
 
+basic_statistics(data)
+exit(1)
 # Groupped age data for theme preference visualization
 groupped_data = data.groupby('D Age').mean()
 bar_charts(groupped_data)
