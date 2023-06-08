@@ -31,7 +31,11 @@ def filter_columns(data):
                          'P themes pos Cultural', 
                          'P themes pos Religious', 'P themes pos Architecture', 
                          'P themes pos Sports', 'P themes pos Winter sports', 
-                         'P themes pos Wellness', 'P themes pos Natural']
+                         'P themes pos Wellness', 'P themes pos Natural',
+                         'F typical budget_1', 'F distribution Accomodation',
+                         'F distribution Travel', 'F distribution Transportation',
+                         'F distribution Activities', 'F distribution Shopping',
+                         'F distribution Extras']
     data = data[data['Finished'] == 'True']
     data = data[selected_columns]
     data = data.dropna()
@@ -63,8 +67,8 @@ data = filter_columns(data)
 data = assign_correct_dtype(data)
 print(data)
 
-basic_statistics(data)
-exit(1)
+# basic_statistics(data)
+# exit(1)
 # Groupped age data for theme preference visualization
 groupped_data = data.groupby('D Age').mean()
 bar_charts(groupped_data)
